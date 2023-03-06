@@ -97,6 +97,7 @@ public class Search {
         double ran = random.nextDouble();
         cell tmp = cells.c[0];
         System.out.println("Checking cell " + tmp.x + " " + tmp.y);
+        System.out.println();
         if(ran < tmp.p && tmp.x == finalLoc[0] && tmp.y == finalLoc[1]){
             return true;
         }else{
