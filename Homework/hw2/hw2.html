@@ -9,6 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Lumi (12112618)" />
 
 <meta name="date" content="2023-03-03" />
 
@@ -350,12 +351,12 @@ display: none;
 
 
 <h1 class="title toc-ignore">Biostatistics Homework 2</h1>
+<h4 class="author">Lumi (12112618)</h4>
 <h4 class="date">2023-03-03</h4>
 
 </div>
 
 
-<p>By Lumi (12112618)</p>
 <pre class="r"><code>library(ggplot2)
 
 setwd(&#39;/Users/lumizhang/Documents/sustech/biology/classes/Biostatistics/Homework/hw2&#39;)</code></pre>
@@ -380,7 +381,7 @@ possibility of the coin having two heads. It is much more likely than
 <span class="math inline">\(\frac{1}{9}\)</span> that the coin is a fair
 coin. So the new probability can be calculated with:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 P(\mathrm{HH} | \mathrm{4H}) &amp;= \frac{P(\mathrm{4H}| \mathrm{HH})
 \cdot P(\mathrm{HH})}{P(\mathrm{4H})} \\
 &amp;= \frac{P(\mathrm{4H}| \mathrm{HH}) \cdot
@@ -390,16 +391,438 @@ P(\mathrm{4H}| \mathrm{HH}) \cdot P(\mathrm{HH})} \\
 (\frac{1}{2})^4 \times \frac{8}{9}}  = \frac{2}{3} \\
 P(\mathrm{HT|4H}) &amp;= 1-P(\mathrm{HH|4H}) = 1-\frac{2}{3} =
 \frac{1}{3}
-\end{align}
+\end{aligned}
 \]</span> Thus we can get the probability of getting another head, based
-on our knowledge that the first four tosses are all heads. <span class="math display">\[
-\begin{align}
+on our knowledge that the first four tosses are all heads.</p>
+<p><span class="math display">\[
+\begin{aligned}
 P(\mathrm{another \ head}) &amp;= P(\mathrm{HH} | \mathrm{4H})\cdot
 P(\mathrm{H|HH}) + P(\mathrm{HT|4H}) \cdot P(\mathrm{H|HT}) \\
 &amp;= \frac{2}{3} \times 1 + \frac{1}{3} \times \frac{1}{2} \\
 &amp;= \frac{5}{6}
-\end{align}
+\end{aligned}
 \]</span></p>
+</div>
+</div>
+<div id="detecting-virus-with-our-kit" class="section level2">
+<h2>2 Detecting Virus with our Kit</h2>
+<div id="section-2" class="section level3">
+<h3>2.1 &amp; 2.2</h3>
+<p><span class="math display">\[
+P(E_1) = 0.01 \times 0.9 + 0.99 \times 0.05 = 0.0585 \\
+P(E_2) = 0.01 \times 0.95 + 0.99 \times 0.1 = 0.1085
+\]</span></p>
+</div>
+<div id="section-3" class="section level3">
+<h3>2.3</h3>
+<p><span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span> are not independent, because sadly,
+the test positive result of any one of the kit increases the probability
+that the person have actually get the virus. When he do a second test,
+the kit is more likely to show a positive result.</p>
+<p><span class="math display">\[
+P(E_1 \cap E_2) \not = P(E_1) \cdot P(E_2)
+\]</span></p>
+</div>
+<div id="section-4" class="section level3">
+<h3>2.4</h3>
+<p>Under the condition that the person is or is not carrying the virus,
+events <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span> are actually independent. So:</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(E_3|E_1 \cap E_2) &amp;= \frac{P(E_1 \cap E_2|E_3) \cdot P(E_3)}{P(E_1
+\cap E_2)} \\
+&amp; = \frac{P(E_1 | E_3) \cdot P(E_2|E_3) \cdot P(E_3)}{P(E_1 \cap
+E_2|E_3) \cdot P(E_3) + P(E_1 \cap E_2|E_3&#39;) \cdot P(E_3&#39;)} \\
+&amp; = \frac{0.9 \times 0.95 \times 0.01}{0.9 \times 0.95 \times 0.01 +
+0.05 \times 0.1 \times 0.99} \\
+&amp; = \frac{19}{30} = 0.633...
+\end{aligned}
+\]</span></p>
+<p>From this problem, we can also see that:</p>
+<p><span class="math display">\[
+P(E_1 \cap E_2) = 0.0135 \\
+P(E_1) \cdot P(E_2) \not = 0.0135
+\]</span></p>
+<p>So <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span> are not independent.</p>
+</div>
+</div>
+<div id="weird-die-again" class="section level2">
+<h2>3 Weird DIE Again</h2>
+<div id="section-5" class="section level3">
+<h3>3.1</h3>
+<pre class="r"><code>die_a &lt;- c(1,2,3,4,5)
+die_b &lt;- c(1,2,3,4,5)
+sample_space &lt;- as.data.frame(expand.grid(die_a, die_b))
+colnames(sample_space) &lt;- c(&quot;die_a&quot;, &quot;die_b&quot;)
+sample_space</code></pre>
+<pre><code>##    die_a die_b
+## 1      1     1
+## 2      2     1
+## 3      3     1
+## 4      4     1
+## 5      5     1
+## 6      1     2
+## 7      2     2
+## 8      3     2
+## 9      4     2
+## 10     5     2
+## 11     1     3
+## 12     2     3
+## 13     3     3
+## 14     4     3
+## 15     5     3
+## 16     1     4
+## 17     2     4
+## 18     3     4
+## 19     4     4
+## 20     5     4
+## 21     1     5
+## 22     2     5
+## 23     3     5
+## 24     4     5
+## 25     5     5</code></pre>
+<pre class="r"><code>sample_space$sum &lt;- sample_space$die_a + sample_space$die_b
+sample_space$A &lt;- sample_space$sum == 10
+sample_space$B &lt;- sample_space$die_a == 5 | sample_space$die_b == 5
+sample_space$C &lt;- sample_space$die_a == 1 | sample_space$die_b == 1
+sample_space</code></pre>
+<pre><code>##    die_a die_b sum     A     B     C
+## 1      1     1   2 FALSE FALSE  TRUE
+## 2      2     1   3 FALSE FALSE  TRUE
+## 3      3     1   4 FALSE FALSE  TRUE
+## 4      4     1   5 FALSE FALSE  TRUE
+## 5      5     1   6 FALSE  TRUE  TRUE
+## 6      1     2   3 FALSE FALSE  TRUE
+## 7      2     2   4 FALSE FALSE FALSE
+## 8      3     2   5 FALSE FALSE FALSE
+## 9      4     2   6 FALSE FALSE FALSE
+## 10     5     2   7 FALSE  TRUE FALSE
+## 11     1     3   4 FALSE FALSE  TRUE
+## 12     2     3   5 FALSE FALSE FALSE
+## 13     3     3   6 FALSE FALSE FALSE
+## 14     4     3   7 FALSE FALSE FALSE
+## 15     5     3   8 FALSE  TRUE FALSE
+## 16     1     4   5 FALSE FALSE  TRUE
+## 17     2     4   6 FALSE FALSE FALSE
+## 18     3     4   7 FALSE FALSE FALSE
+## 19     4     4   8 FALSE FALSE FALSE
+## 20     5     4   9 FALSE  TRUE FALSE
+## 21     1     5   6 FALSE  TRUE  TRUE
+## 22     2     5   7 FALSE  TRUE FALSE
+## 23     3     5   8 FALSE  TRUE FALSE
+## 24     4     5   9 FALSE  TRUE FALSE
+## 25     5     5  10  TRUE  TRUE FALSE</code></pre>
+<pre class="r"><code>a &lt;- sum(sample_space$A == TRUE)
+b &lt;- sum(sample_space$B == T)
+c &lt;- sum(sample_space$C == T)
+ab &lt;- sum(sample_space$A == T &amp; sample_space$B == T)
+ac &lt;- sum(sample_space$A == T &amp; sample_space$C == T)
+sprintf(&quot;ab : %i/25, ac : %i/25&quot;, ab, ac)</code></pre>
+<pre><code>## [1] &quot;ab : 1/25, ac : 0/25&quot;</code></pre>
+<p>We can see from the table and the printed results that</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(A\cap B) &amp;\not = P(A) \cdot P(B) \\
+&amp;\mathrm{and} \\
+P(A\cap C) &amp;\not = P(A) \cdot P(B)
+\end{aligned}
+\]</span></p>
+<p>So <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are not independent, and <span class="math inline">\(A\)</span> and <span class="math inline">\(C\)</span> are also not independent. Actually,
+<span class="math inline">\(A\)</span> and <span class="math inline">\(C\)</span> are mutually exclusive, so they are
+strongly dependent on each other.</p>
+</div>
+<div id="section-6" class="section level3">
+<h3>3.2</h3>
+<pre class="r"><code>sample_space$D &lt;- sample_space$sum == 7
+sample_space$E &lt;- abs(sample_space$die_a - sample_space$die_b) == 1
+sample_space$F &lt;- sample_space$die_a &lt; sample_space$die_b 
+e &lt;- sum(sample_space$E == T)
+f &lt;- sum(sample_space$F == T)
+ef &lt;- sum(sample_space$E == T &amp; sample_space$F == T)
+sample_space[sample_space$F == T, c(&quot;E&quot;,&quot;F&quot;)]</code></pre>
+<pre><code>##        E    F
+## 6   TRUE TRUE
+## 11 FALSE TRUE
+## 12  TRUE TRUE
+## 16 FALSE TRUE
+## 17 FALSE TRUE
+## 18  TRUE TRUE
+## 21 FALSE TRUE
+## 22 FALSE TRUE
+## 23 FALSE TRUE
+## 24  TRUE TRUE</code></pre>
+<p><span class="math display">\[
+P(E|F) = \frac{4}{10} \not = P(E) = \frac{8}{25}
+\]</span></p>
+<p>So <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> are not independent.</p>
+<pre class="r"><code>sample_space[sample_space$D == T, c(&quot;E&quot;, &quot;F&quot;)]</code></pre>
+<pre><code>##        E     F
+## 10 FALSE FALSE
+## 14  TRUE FALSE
+## 18  TRUE  TRUE
+## 22 FALSE  TRUE</code></pre>
+<p><span class="math display">\[
+P(E|F) = 0.5 = P(E) , P(F) \not = 0
+\]</span></p>
+<p>So they are independent under the condition that <span class="math inline">\(D\)</span> is true.</p>
+</div>
+</div>
+<div id="whats-a-cd-rom" class="section level2">
+<h2>4 What’s a CD-ROM?</h2>
+<div id="section-7" class="section level3">
+<h3>4.1</h3>
+<p>Number of defected old CD-ROMs are : <span class="math inline">\(500
+\times 15\% = 75\)</span></p>
+<p>Number of defected new CD-ROMs are : <span class="math inline">\(1500
+\times 5 \% = 75\)</span></p>
+<p>So,</p>
+<p>the probability of buying two successive broken old CD-ROMs are <span class="math inline">\(\frac{75}{500} \times \frac{74}{499} =
+\frac{111}{4990}\)</span></p>
+<p>the probability of buying two successive broken old CD-ROMs are <span class="math inline">\(\frac{75}{1500} \times \frac{74}{1499} =
+\frac{37}{14990}\)</span></p>
+<p>so the probability of event <span class="math inline">\(A\)</span>
+that both CD-ROMs being defected is:</p>
+<p><span class="math display">\[
+P(A) = P(\mathrm{old}) \cdot \frac{111}{4990} + P(\mathrm{new})\cdot
+\frac{37}{14990} \approx 0.0123
+\]</span></p>
+</div>
+<div id="section-8" class="section level3">
+<h3>4.2</h3>
+<p><span class="math display">\[
+P(\mathrm{old} | A) = \frac{P(A| \mathrm {old}) \cdot
+P(\mathrm{old})}{P(A)} = \frac{\frac{111}{4990}\times 0.5}{0.0123} =
+\frac{4497}{4996} \approx 0.9
+\]</span></p>
+</div>
+</div>
+<div id="activating-transcription-factor-1" class="section level2">
+<h2>5 Activating Transcription Factor 1</h2>
+<p>First we look at the RAS <span class="math inline">\(\rightarrow\)</span> PI3K <span class="math inline">\(\rightarrow\)</span> AKT <span class="math inline">\(\rightarrow\)</span> TF1 pathway. The probability
+of this pathway succeeding is</p>
+<p><span class="math display">\[
+0.9 \times 0.8 \times 0.9 = 0.648
+\]</span></p>
+<p>Then we look at the RAS <span class="math inline">\(\rightarrow\)</span> RAF <span class="math inline">\(\rightarrow\)</span> MEK <span class="math inline">\(\rightarrow\)</span> ERK1 or ERK2 <span class="math inline">\(\rightarrow\)</span> TF1 pathway. The probability
+of this pathway succeeding is</p>
+<p><span class="math display">\[
+0.8 \times 0.9 \times ( 1 - (1 - 0.9 \times 0.8)(1 - 0.8 \times 0.8)) =
+0.647424
+\]</span></p>
+<p>So in order for the whole RTK <span class="math inline">\(\rightarrow\)</span> TF1 to succeed, at least one
+of the two pathways should succeed.</p>
+<p><span class="math display">\[
+P(\mathrm{TF1}) = 0.9 \times (1 - (1 - 0.648) (1 - 0.647424)) \approx
+0.7883
+\]</span></p>
+</div>
+<div id="weird-signals" class="section level2">
+<h2>6 Weird Signals</h2>
+<div id="section-9" class="section level3">
+<h3>6.1</h3>
+<p>The k-th signal is an independent event. So the probability of event
+<span class="math inline">\(A\)</span> = {receive correctly} is</p>
+<p><span class="math display">\[
+P(A) = p \cdot (1-\epsilon_0) + (1-p) \epsilon_1
+\]</span></p>
+</div>
+<div id="section-10" class="section level3">
+<h3>6.2</h3>
+<p>Because receiving the signal are independent events, we know that</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(1011 | 1011) &amp;= P(1|1) \cdot P(0|0) \cdot P(1|1) \cdot P(1|1) \\
+&amp;= (1- \epsilon_1) (1-\epsilon_0) (1- \epsilon_1) (1- \epsilon_1)
+\end{aligned}
+\]</span></p>
+</div>
+<div id="section-11" class="section level3">
+<h3>6.3</h3>
+<p>Event <span class="math inline">\(A\)</span> = three zeros. Event
+<span class="math inline">\(B\)</span> = two zeros.</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(A) &amp;= (1 - \epsilon_0)^3 \\
+P(B) &amp;= (1-\epsilon_0)^2\cdot \epsilon_0 \cdot \binom{3}{1} =
+3(1-\epsilon_0)^2\epsilon_0 \\
+P(\mathrm{correct}) &amp;= P(A) + P(B) = (1 - \epsilon_0)^2
+(1+2\epsilon_0)
+\end{aligned}
+\]</span></p>
+</div>
+<div id="section-12" class="section level3">
+<h3>6.4</h3>
+<p>We can see the improvement from this:</p>
+<p><span class="math display">\[
+\frac{P(\mathrm{correct} | \mathrm{3times})}{P(\mathrm{correct} |
+\mathrm{1time})} = \frac{(1 - \epsilon_0)^2
+(1+2\epsilon_0)}{1-\epsilon_0} = (1-\epsilon_0)(1+2\epsilon_0) = 1 +
+\epsilon_0 - 2\epsilon_0^2
+\]</span></p>
+<p>Because we want an improvement, we want <span class="math inline">\(1
++ \epsilon_0 - 2\epsilon_0^2\)</span> to be larger than 1. So:</p>
+<p><span class="math display">\[
+\begin{aligned}
+1 + \epsilon_0 - 2 \epsilon_0^2 &amp;&gt; 1 \\
+\epsilon_0 &amp;&gt; 2\epsilon_0^2 \\
+0 &lt; \epsilon_0 &amp;&lt; \frac{1}{2}
+\end{aligned}
+\]</span></p>
+</div>
+<div id="section-13" class="section level3">
+<h3>6.5</h3>
+<p><span class="math display">\[
+\begin{aligned}
+P(0|101) &amp;= \frac{P(101|0) \cdot P(0)}{P(101|0) \cdot P(0) +
+P(101|1) \cdot P(1)} \\
+&amp; = \frac{\epsilon_0^2(1-\epsilon_0)p}{\epsilon_0^2(1-\epsilon_0)p +
+(1-\epsilon_1)^2 \epsilon_1 (1-p)}
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+<div id="happy-prison" class="section level2">
+<h2>7 Happy Prison</h2>
+<p>The important thing here is that out of three prisoners, two will be
+chosen. So no matter if our lovely prisoner of interest is chosen to be
+released or not, there will always be another prisoner from the other
+two prisoners to be chosen. In other words <span class="math inline">\(P(B|A) = P(B|A&#39;)\)</span> . So</p>
+<p><span class="math display">\[
+P(A|B) = \frac{P(B|A)P(A)}{P(B|A)P(A) +P(B|A&#39;)P(A&#39;)} = P(A)
+\]</span></p>
+<p>So event <span class="math inline">\(A\)</span> and event <span class="math inline">\(B\)</span> are independent.</p>
+</div>
+<div id="searching-in-a-smarter-way" class="section level2">
+<h2>8 Searching in a Smarter Way</h2>
+<p>From intuition, the fact that we didn’t find the object in cell <span class="math inline">\(i\)</span> must cause a reduction of the
+probability that the object is in cell <span class="math inline">\(i\)</span>, and an increase in the probability of
+finding the object in other cells.</p>
+<p>We can prove this in a mathematical way (although mine might be
+wrong, but the results turned out to be ok). So, suppose event <span class="math inline">\(X_i\)</span> means not finding the object in cell
+<span class="math inline">\(i\)</span> and <span class="math inline">\(\Pi_i\)</span> means the event of finding the
+object in the cell <span class="math inline">\(i\)</span> (we use <span class="math inline">\(\Pi\)</span> instead of <span class="math inline">\(\pi\)</span> to differentiate these two).</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\Pi_i | X_i) &amp;= \frac{P(X_i | \Pi_i) P(\Pi_i)}{P(X_i)} \\
+&amp;=\frac{(1-p_i) \pi_i}{1 - \pi_i p_i}
+\end{aligned}
+\]</span></p>
+<p>We can prove that the updated information in the cell <span class="math inline">\(i\)</span> actually leads to a decrease in
+probability of finding the object inside the cell. In other words <span class="math inline">\(P(\Pi_i | X_i) &lt; \pi_i\)</span>, since <span class="math inline">\(p_i\)</span> doesn’t change.</p>
+<p><span class="math display">\[
+\frac{P(\Pi_i | X_i) }{\pi_i} = \frac{1-p_i}{1-\pi_ip_i} &lt; 1,
+\mathrm{thus \ } P(\Pi_i | X_i) &lt; \pi_i
+\]</span></p>
+<p>Because <span class="math inline">\(\pi_i &lt; 1\)</span> so, <span class="math inline">\(p_i &gt; \pi_i p_i\)</span>, <span class="math inline">\(1-\pi_i p_i &gt; 1- p_i\)</span> . Which fits our
+guess that the updated probability should be smaller.</p>
+<p>As for other cells, the possibility should be larger, <span class="math inline">\(P(\Pi_j | X_i) &gt; \pi_j\)</span>.</p>
+<p><span class="math display">\[
+P(\Pi_j |X_i) = \frac{P(X_i|\Pi_j)P(\Pi_j)}{P(X_i)} =
+\frac{\pi_j}{1-\pi_ip_i}
+\]</span></p>
+<p>Because <span class="math inline">\(1-\pi_i p_i\)</span> is smaller
+than 1 but greater that 0, we can see that <span class="math inline">\(P(\Pi_j | X_i) &gt; \pi_j\)</span>.</p>
+<p>The results are consistent with our intuitions.</p>
+<div id="optional-java-practice" class="section level3">
+<h3>Optional Java Practice</h3>
+<p>I have written a java program that can perform the function of
+Bayesian search on any size-determined area. The code can be found on my
+<a href="https://github.com/BHAAA-ZLM/Biostats/blob/main/Homework/Biostats/src/Search.java">Github
+page</a>, feel free to copy it and play.</p>
+<p>The program will ask you whether you want to print the possibility of
+finding the thing if the thing is in the cell, whether you want to set
+the position of the thing (if not the position will be randomly
+generated), the size of the matrix, and the <span class="math inline">\(\pi\)</span> and <span class="math inline">\(p\)</span> values in each of the cells (you can
+use the auto generated values with <span class="math inline">\(\pi =
+\frac{1}{n^2}\)</span> and <span class="math inline">\(p =
+0.5\)</span>).</p>
+<p>One example is shown here:</p>
+<pre><code>Welcome to the Bayesian Search Game!
+The object of interest is hidden in a grid of cells.
+Cell i, j means the cell in the i-th row, j-th column
+By Lumi, 2023
+
+Do you want to print probability of finding p (y/n): 
+y
+Do you want to set the position of interest (y/n): 
+y
+Enter the size of the cells: 
+5
+Enter the position of interest: 
+3 1
+Use preset values? (y/n)
+n
+Enter your values of pi and p for each cell: 
+0.005 0.7 0.002 0.6 0.001 0.3 0.007 0.6 0.007 1
+        0 0.1 0.001 0.7 0.002 0.8 0.52 0.9 0.002 0.8
+        0 0 0.001 0.8 0.002 0.9 0 0 0.004 0.6
+        0.005 1 0.43 0.4 0 0 0 0 0.002 0.7
+        0.001 0.7 0.003 0.8 0.002 0.7 0.002 0.3 0.001 0.9
+Initial cell:
+0.0050 (0.70) | 0.0020 (0.60) | 0.0010 (0.30) | 0.0070 (0.60) | 0.0070 (1.00) | 
+0.0000 (0.10) | 0.0010 (0.70) | 0.0020 (0.80) | 0.5200 (0.90) | 0.0020 (0.80) | 
+0.0000 (0.00) | 0.0010 (0.80) | 0.0020 (0.90) | 0.0000 (0.00) | 0.0040 (0.60) | 
+0.0050 (1.00) | 0.4300 (0.40) | 0.0000 (0.00) | 0.0000 (0.00) | 0.0020 (0.70) | 
+0.0010 (0.70) | 0.0030 (0.80) | 0.0020 (0.70) | 0.0020 (0.30) | 0.0010 (0.90) | 
+
+Checking cell 1 3
+0.0094 (0.70) | 0.0038 (0.60) | 0.0019 (0.30) | 0.0132 (0.60) | 0.0132 (1.00) | 
+0.0000 (0.10) | 0.0019 (0.70) | 0.0038 (0.80) | 0.0977 (0.90) | 0.0038 (0.80) | 
+0.0000 (0.00) | 0.0019 (0.80) | 0.0038 (0.90) | 0.0000 (0.00) | 0.0075 (0.60) | 
+0.0094 (1.00) | 0.8083 (0.40) | 0.0000 (0.00) | 0.0000 (0.00) | 0.0038 (0.70) | 
+0.0019 (0.70) | 0.0056 (0.80) | 0.0038 (0.70) | 0.0038 (0.30) | 0.0019 (0.90) | 
+
+Checking cell 3 1
+0.0139 (0.70) | 0.0056 (0.60) | 0.0028 (0.30) | 0.0194 (0.60) | 0.0194 (1.00) | 
+0.0000 (0.10) | 0.0028 (0.70) | 0.0056 (0.80) | 0.1444 (0.90) | 0.0056 (0.80) | 
+0.0000 (0.00) | 0.0028 (0.80) | 0.0056 (0.90) | 0.0000 (0.00) | 0.0111 (0.60) | 
+0.0139 (1.00) | 0.7167 (0.40) | 0.0000 (0.00) | 0.0000 (0.00) | 0.0056 (0.70) | 
+0.0028 (0.70) | 0.0083 (0.80) | 0.0056 (0.70) | 0.0056 (0.30) | 0.0028 (0.90) | 
+
+Checking cell 3 1
+0.0195 (0.70) | 0.0078 (0.60) | 0.0039 (0.30) | 0.0273 (0.60) | 0.0273 (1.00) | 
+0.0000 (0.10) | 0.0039 (0.70) | 0.0078 (0.80) | 0.2025 (0.90) | 0.0078 (0.80) | 
+0.0000 (0.00) | 0.0039 (0.80) | 0.0078 (0.90) | 0.0000 (0.00) | 0.0156 (0.60) | 
+0.0195 (1.00) | 0.6028 (0.40) | 0.0000 (0.00) | 0.0000 (0.00) | 0.0078 (0.70) | 
+0.0039 (0.70) | 0.0117 (0.80) | 0.0078 (0.70) | 0.0078 (0.30) | 0.0039 (0.90) | 
+
+Checking cell 3 1
+0.0257 (0.70) | 0.0103 (0.60) | 0.0051 (0.30) | 0.0359 (0.60) | 0.0359 (1.00) | 
+0.0000 (0.10) | 0.0051 (0.70) | 0.0103 (0.80) | 0.2668 (0.90) | 0.0103 (0.80) | 
+0.0000 (0.00) | 0.0051 (0.80) | 0.0103 (0.90) | 0.0000 (0.00) | 0.0205 (0.60) | 
+0.0257 (1.00) | 0.4766 (0.40) | 0.0000 (0.00) | 0.0000 (0.00) | 0.0103 (0.70) | 
+0.0051 (0.70) | 0.0154 (0.80) | 0.0103 (0.70) | 0.0103 (0.30) | 0.0051 (0.90) | 
+
+Checking cell 1 3
+0.0338 (0.70) | 0.0135 (0.60) | 0.0068 (0.30) | 0.0473 (0.60) | 0.0473 (1.00) | 
+0.0000 (0.10) | 0.0068 (0.70) | 0.0135 (0.80) | 0.0351 (0.90) | 0.0135 (0.80) | 
+0.0000 (0.00) | 0.0068 (0.80) | 0.0135 (0.90) | 0.0000 (0.00) | 0.0270 (0.60) | 
+0.0338 (1.00) | 0.6272 (0.40) | 0.0000 (0.00) | 0.0000 (0.00) | 0.0135 (0.70) | 
+0.0068 (0.70) | 0.0203 (0.80) | 0.0135 (0.70) | 0.0135 (0.30) | 0.0068 (0.90) | 
+
+Checking cell 3 1
+The object of interest is found after 5 rounds!
+It is in 3 1
+The final cell looks like
+0.0338 (0.70) | 0.0135 (0.60) | 0.0068 (0.30) | 0.0473 (0.60) | 0.0473 (1.00) | 
+0.0000 (0.10) | 0.0068 (0.70) | 0.0135 (0.80) | 0.0351 (0.90) | 0.0135 (0.80) | 
+0.0000 (0.00) | 0.0068 (0.80) | 0.0135 (0.90) | 0.0000 (0.00) | 0.0270 (0.60) | 
+0.0338 (1.00) | 0.6272 (0.40) | 0.0000 (0.00) | 0.0000 (0.00) | 0.0135 (0.70) | 
+0.0068 (0.70) | 0.0203 (0.80) | 0.0135 (0.70) | 0.0135 (0.30) | 0.0068 (0.90) | 
+
+Congratulations!</code></pre>
+<p>We can see that when the cell (1,3) have a high possibility of having
+the object and a high possibility of finding the object, there is a
+great chance of finding the thing there. If it is not found in cell
+(1,3), the chance of the thing being there dramatically declined.</p>
+<p>Although there is a great possibility of the object being in our cell
+of interest (3,1), the actual possibility of finding it there is low
+(0.4). So if you didn’t find it in (3,1), the possibility won’t change a
+lot.</p>
+<p>Another interesting find is that, if you set the possibility of the
+thing being in the cell to zero, the Bayesian search method will always
+ignore the cell and never look into it, which is quite sad.</p>
+<p>All in all, it’s a fun practice.</p>
 </div>
 </div>
 

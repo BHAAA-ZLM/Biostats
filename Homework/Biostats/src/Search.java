@@ -96,6 +96,7 @@ public class Search {
         Arrays.sort(cells.c, (c1, c2) -> Double.compare(c2.p * c2.pi, c1.p * c1.pi));
         double ran = random.nextDouble();
         cell tmp = cells.c[0];
+        System.out.println("Checking cell " + tmp.x + " " + tmp.y);
         if(ran < tmp.p && tmp.x == finalLoc[0] && tmp.y == finalLoc[1]){
             return true;
         }else{
