@@ -120,7 +120,7 @@ $$
 \begin{aligned}
 P(A\cap B) &\not = P(A) \cdot P(B) \\
 &\mathrm{and} \\
-P(A\cap C) &\not = P(A) \cdot P(B)
+P(A\cap C) &\not = P(A) \cdot P(B) \\
 \end{aligned}
 $$
 
